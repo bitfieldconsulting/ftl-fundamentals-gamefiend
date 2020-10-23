@@ -22,3 +22,12 @@ func TestSubtract(t *testing.T) {
 		t.Errorf("want %f, got %f", want, got)
 	}
 }
+
+func TestMultiply(t *testing.T) {
+	t.Parallel()
+	var want float64 = 10
+	got := calculator.Multiply(5, 2)
+	if want != got {
+		t.Errorf("want %f, got %f", want, got)
+	}
+}
