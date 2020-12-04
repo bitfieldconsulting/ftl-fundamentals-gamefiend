@@ -46,29 +46,47 @@ var multiplyTests = multiplyTest{
 func TestAdd(t *testing.T) {
 	t.Parallel()
 	for _, tt := range addTests {
-		got := calculator.Add(tt.a, tt.b)
+		t.Run(tt.name, func(t *testing.T) {
+			got := calculator.Add(tt.a, tt.b)
 		if tt.want != got {
 			t.Errorf("%s: want %f, got %f",tt.name, tt.want, got)
 		}
+	})
 	}
 }
 
 func TestSubtract(t *testing.T) {
 	t.Parallel()
 	for _, tt := range subtractTests {
-		got := calculator.Subtract(tt.a, tt.b)
-		if tt.want != got {
-			t.Errorf("%s: want %f, got %f",tt.name, tt.want, got)
-		}
+		t.Run(tt.name, func(t *testing.T) {
+			got := calculator.Subtract(tt.a, tt.b)
+			if tt.want != got {
+				t.Errorf("%s: want %f, got %f", tt.name, tt.want, got)
+			}
+		})
 	}
 }
 
 func TestMultiply(t *testing.T) {
 	t.Parallel()
 	for _, tt := range multiplyTests {
-		got := calculator.Multiply(tt.a, tt.b)
-		if tt.want != got {
-			t.Errorf("%s: want %f, got %f",tt.name, tt.want, got)
-		}
+		t.Run(tt.name, func(t *testing.T) {
+			got := calculator.Multiply(tt.a, tt.b)
+			if tt.want != got {
+				t.Errorf("%s: want %f, got %f", tt.name, tt.want, got)
+			}
+		})
+	}
+}
+
+func TestDivide(t *testing.T) {
+	t.Parallel()
+	for _, tt := range multiplyTests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := calculator.Divide(tt.a, tt.b)
+			if tt.want != got {
+				t.Errorf("%s: want %f, got %f", tt.name, tt.want, got)
+			}
+		})
 	}
 }
