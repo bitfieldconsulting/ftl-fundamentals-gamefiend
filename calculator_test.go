@@ -81,11 +81,25 @@ func TestMultiply(t *testing.T) {
 
 func TestDivide(t *testing.T) {
 	t.Parallel()
-	for _, tt := range multiplyTests {
-		t.Run(tt.name, func(t *testing.T) {
-			got := calculator.Divide(tt.a, tt.b)
-			if tt.want != got {
-				t.Errorf("%s: want %f, got %f", tt.name, tt.want, got)
+	tcs := []struct{
+		name string
+		a, b float64
+		want float64
+		errExpected bool
+	}{
+		{ name: "Happy", a: 2, b: 1, want: 2 },
+		{ name: "Zero divided by...", a: 0, b: 1, want: 0 },
+		{ name: "Division by zero", a: 1, b: 0, want: 999, errExpected: true },
+	}
+	for _, tc := range tcs {
+		t.Run(tc.name, func(t *testing.T) {
+			got, err := calculator.Divide(tc.a, tc.b)
+			errReceived := err != nil
+			if tc.errExpected != errReceived {
+				t.Fatalf("unexpected error status %v", err)
+			}
+			if !tc.errExpected && tc.want != got {
+				t.Errorf("%s: want %f, got %f", tc.name, tc.want, got)
 			}
 		})
 	}
