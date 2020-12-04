@@ -95,3 +95,29 @@ func TestDivide(t *testing.T) {
 		})
 	}
 }
+
+func TestSqrt(t *testing.T) {
+	t.Parallel()
+	tcs := []struct {
+		name        string
+		input       float64
+		want        float64
+		errExpected bool
+	}{
+		{name: "Happy", input: 4, want: 2},
+		{name: "Zero", input: 0, want: 0},
+		{name: "Negative", input: -1, want: 999, errExpected: false},
+	}
+	for _, tc := range tcs {
+		t.Run(tc.name, func(t *testing.T) {
+			got, err := calculator.Sqrt(tc.input)
+			errReceived := err != nil
+			if tc.errExpected != errReceived {
+				t.Fatalf("unexpected error status: %v", err)
+			}
+			if !tc.errExpected && tc.want != got {
+				t.Errorf("%s: want %f, got %f", tc.name, tc.want, got)
+			}
+		})
+	}
+}
