@@ -45,18 +45,19 @@ func Multiply(a, b float64, nums ...float64) float64 {
 
 // Divide takes two numbers and returns the result of dividing the first by the
 // second, or an error if the second value is zero.
-func Divide(nums ...float64) (float64, error) {
-	total := nums[0]
-	for i, d := range nums {
-		// skip the first element, which is the total
-		if i == 0 {
-			continue
+func Divide(a, b float64, nums ...float64) (float64, error) {
+	if b == 0 {
+		return 0, errors.New("division by zero is undefined")
+	}
+	total := a / b
+	if len(nums) > 0 {
+		for _, d := range nums {
+			// return error if divisor is 0
+			if d == 0 {
+				return 0, errors.New("division by zero is undefined")
+			}
+			total /= d
 		}
-		// return error if divisor is 0
-		if d == 0 {
-			return 0, errors.New("division by zero is undefined")
-		}
-		total /= d
 	}
 	return total, nil
 }

@@ -108,7 +108,7 @@ func TestDivide(t *testing.T) {
 	}
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			got, err := calculator.Divide(tc.nums...)
+			got, err := calculator.Divide(tc.nums[0], tc.nums[1], tc.nums[2:]...)
 			errReceived := err != nil
 			if tc.errExpected != errReceived {
 				t.Fatalf("unexpected error status %v", err)
