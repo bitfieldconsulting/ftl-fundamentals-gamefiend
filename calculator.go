@@ -8,39 +8,36 @@ import (
 )
 
 // Add takes two numbers and returns the result of adding them together.
-func Add(nums ...float64) float64 {
-	total := nums[0]
-	for i, d := range nums {
-		if i == 0 {
-			continue
+func Add(a, b float64, nums ...float64) float64 {
+	total := a + b
+	if len(nums) > 0 {
+		for _, d := range nums {
+			total += d
 		}
-		total += d
 	}
 	return total
 }
 
 // Subtract takes two numbers and returns the result of subtracting the second
 // from the first.
-func Subtract(nums ...float64) float64 {
-	total := nums[0]
-	for i, d := range nums {
-		if i == 0 {
-			continue
+func Subtract(a, b float64, nums ...float64) float64 {
+	total := a - b
+	if len(nums) > 0 {
+		for _, d := range nums {
+			total -= d
 		}
-		total -= d
 	}
 	return total
 }
 
 // Multiply takes two numbers and returns the result of multiplying the first by
 // the second.
-func Multiply(nums ...float64) float64 {
-	total := nums[0]
-	for i, d := range nums {
-		if i == 0 {
-			continue
+func Multiply(a, b float64, nums ...float64) float64 {
+	total := a * b
+	if len(nums) > 0 {
+		for _, d := range nums {
+			total *= d
 		}
-		total *= d
 	}
 	return total
 

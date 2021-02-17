@@ -11,7 +11,7 @@ func TestAddSubtractMultiply(t *testing.T) {
 		nums []float64
 		want float64 // output
 		name string  // label
-		f    func(nums ...float64) float64
+		f    func(a, b float64, nums ...float64) float64
 	}{
 		{
 			name: "Addition of two small integers",
@@ -67,12 +67,14 @@ func TestAddSubtractMultiply(t *testing.T) {
 			want: 0.5,
 			f:    calculator.Multiply,
 		},
-		{name: "Multiplication of two floating points",
+		{
+			name: "Multiplication of two floating points",
 			nums: []float64{10.5, 1.0},
 			want: 10.5,
 			f:    calculator.Multiply,
 		},
-		{name: "Multiplication of three floating points",
+		{
+			name: "Multiplication of three floating points",
 			nums: []float64{10.5, 1.0, 3.0},
 			want: 31.5,
 			f:    calculator.Multiply,
@@ -81,7 +83,7 @@ func TestAddSubtractMultiply(t *testing.T) {
 
 	for _, tc := range tcs {
 		t.Run(tc.name, func(t *testing.T) {
-			got := tc.f(tc.nums...)
+			got := tc.f(tc.nums[0], tc.nums[1], tc.nums[2:]...)
 			if tc.want != got {
 				t.Errorf("want %f, got %f", tc.want, got)
 			}
